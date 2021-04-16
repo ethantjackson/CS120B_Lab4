@@ -14,14 +14,15 @@
 # An example set of tests is shown below. It is important to note that these tests are not "unit tests" in 
 # that they are not ran in isolation but in the order shown and the state of the device is not reset or 
 # altered in between executions (unless preconditions are used).
-tests = [ {'description': 'PINA:0x00, 0x01, 0x00, 0x01, 0x02 => PORTC: 0, 1, 1, 2, 1',
-    'steps': [ {'inputs': [('PINA',0x00)], 'iterations': 1 },
+tests = [ {'description': 'PINA:0x00, 0x01, 0x00, 0x01, 0x02 => PORTC: 7, 8, 8, 9, 8',
+    'steps': [ {'inputs': [('PINA',0x00)], 'iterations': 2 },
 	{'inputs': [('PINA',0x01)], 'iterations': 3 },
 	{'inputs': [('PINA',0x00)], 'iterations': 2 },
 	{'inputs': [('PINA',0x01)], 'iterations': 2 },
 	{'inputs': [('PINA',0x02)], 'iterations': 2 }],
-    'expected': [('PORTC',1)],
+    'expected': [('PORTC',8)],
     },
+#	{'description': 'test inc', 'steps': [{'inputs': [('PINA', 0x00)], 'iterations':1}, {'inputs': [('PINA', 0x01)], 'iterations': 1}], 'expected': [('PORTC', 8)]}
     ]
 
 # Optionally you can add a set of "watch" variables these need to be global or static and may need

@@ -12,11 +12,14 @@
 #include "simAVRHeader.h"
 #endif
 
-enum SM_STATES {SM_Start, SM_Wait, SM_Inc, SM_Dec, SM_Reset} SM_STATE;
+enum SM_STATES {SM_Start, SM_Init, SM_Wait, SM_Inc, SM_Dec, SM_Reset} SM_STATE;
 unsigned char prevInput = 0x00;
 void Tick_Fct() {
     switch(SM_STATE) {
 	case SM_Start:
+	    SM_STATE = SM_Init;
+	    break;
+	case SM_Init: 
 	    SM_STATE = SM_Wait;
 	    break;
 	case SM_Wait:
@@ -40,7 +43,9 @@ void Tick_Fct() {
     }
     switch(SM_STATE) {
 	case SM_Start:
-	    PORTC = 0x00;
+	    break;
+        case SM_Init:
+	    PORTC = 7;
 	    break;
 	case SM_Wait:
 	    break;
