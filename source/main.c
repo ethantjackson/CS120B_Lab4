@@ -21,14 +21,14 @@ void Tick_Fct() {
 	    SM_STATE = SM_WaitFirst;
 	    break;
 	case SM_WaitFirst: 
-	    if (PINA && PINA!=prevInput) SM_STATE = SM_First;
+	    if (PINA && !prevInput) SM_STATE = SM_First;
 	    else SM_STATE = SM_WaitFirst;
 	    break;
 	case SM_First:
 	    SM_STATE = SM_WaitSecond;
 	    break;
 	case SM_WaitSecond:
-	    if (PINA && PINA!=prevInput) SM_STATE = SM_Second;
+	    if (PINA && !prevInput) SM_STATE = SM_Second;
 	    else SM_STATE = SM_WaitSecond;
 	    break;
 	case SM_Second:
