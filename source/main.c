@@ -26,15 +26,16 @@ void Tick_Fct() {
 	    else SM_STATE = SM_Wait;
 	    break;
 	case SM_GetBtn:
-	    if (seqIndex > 3) SM_STATE = SM_Check;
+	    if (seqIndex >= 3) SM_STATE = SM_Check;
 	    else SM_STATE = SM_Wait;
 	    break;
 	case SM_Check:
-            if (Inputs[0]==0x04 && Inputs[1]==0x01 && Inputs[2]==0x02 && Inputs[3]==0x01) {
-	        if (PINB==0x00) SM_STATE = SM_Unlock;
-	        else if (PINB==0x01) SM_STATE = SM_Lock;
+            /*if (Inputs[0]==0x04 && Inputs[1]==0x01 && Inputs[2]==0x02 && Inputs[3]==0x01) {
+	       if (PINB==0x00) SM_STATE = SM_Unlock;
+	       else if (PINB==0x01) SM_STATE = SM_Lock;
 	    }
-            else SM_STATE = SM_Wait;	
+            else*/ SM_STATE = SM_Wait;	
+	    PORTB = 0xFF;
 	    break;
 	case SM_Unlock:
             SM_STATE = SM_Wait;
