@@ -30,15 +30,15 @@ void Tick_Fct() {
 	    break;
 	case SM_Second:
             if (PINA & 0x80) SM_STATE = SM_Lock;
-	    else if (prevInput != 0x04 && PINA & 0x02 && !(PINA & 0x04 || PINA & 0x01)) SM_STATE = SM_Unlock;
-  	    else if (prevInput != 0x04 && PINA) SM_STATE = SM_Wait;
+	    else if ((prevInput != 0x04 && !(PINA&0x04)) && PINA & 0x02 && !(PINA & 0x04 || PINA & 0x01)) SM_STATE = SM_Unlock;
+  	    else if ((prevInput != 0x04 && !(PINA&0x04)) && PINA) SM_STATE = SM_Wait;
 	    break;
 	case SM_Unlock:
             if (PINA & 0x80) SM_STATE = SM_Lock;
-	    else if (prevInput != 0x02) SM_STATE = SM_Wait;
+	    else if (prevInput != 0x02 && !(PINA&0x02)) SM_STATE = SM_Wait;
 	    break;
 	case SM_Lock:
-	    if (prevInput != 0x80) SM_STATE = SM_Wait;
+	    if (prevInput != 0x80 && !(PINA&0x80)) SM_STATE = SM_Wait;
 	    break;
 	default:
 	    SM_STATE = SM_Wait;
