@@ -28,13 +28,13 @@ void Tick_Fct() {
 	    break;
 	case SM_Check:
             if (Inputs[0]==0x04 && Inputs[1]==0x01 && Inputs[2]==0x02 && Inputs[3]==0x01) {
-	       if (PINB==0x00) SM_STATE = SM_Unlock;
-	       else if (PINB==0x01) SM_STATE = SM_Lock;
+	       SM_STATE = SM_Unlock;
 	    }
             else SM_STATE = SM_Wait;	
 	    break;
 	case SM_Unlock:
-            SM_STATE = SM_Wait;
+	    if (PINA & 0x80) SM_STATE = SM_Lock;
+            else SM_STATE = SM_Unlock;
 	    break;
 	case SM_Lock:
 	    SM_STATE = SM_Wait;
@@ -53,10 +53,10 @@ void Tick_Fct() {
 	    seqIndex = 0;
  	    break;
 	case SM_Unlock:
-	    PORTB = 0x01;
+	    PORTB = 1;
 	    break;
 	case SM_Lock:
-	    PORTB = 0x00;
+	    PORTB = 0;
 	    break;
 	default:
 	    break;

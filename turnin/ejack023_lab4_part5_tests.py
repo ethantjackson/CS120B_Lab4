@@ -17,14 +17,14 @@
 tests = [ 
     {'description': 'PINA:0x04, 0x00, 0x01, 0x00, 0x02, 0x00, 0x01 => PORTB: 0x00->0x01',
         'steps': [ 
-	{'inputs': [('PINA',0x04)], 'iterations': 10 },
-	{'inputs': [('PINA',0x00)], 'iterations': 10 },
-	{'inputs': [('PINA',0x01)], 'iterations': 10 },
-	{'inputs': [('PINA',0x00)], 'iterations': 10 },
-	{'inputs': [('PINA',0x02)], 'iterations': 10 },
-	{'inputs': [('PINA',0x00)], 'iterations': 10 },
-	{'inputs': [('PINA',0x01)], 'iterations': 10 }],
-        'expected': [('PORTB', 0x01)], },
+	{'inputs': [('PINA',0x04)], 'iterations': 3 },
+	{'inputs': [('PINA',0x00)], 'iterations': 3 },
+	{'inputs': [('PINA',0x01)], 'iterations': 3 },
+	{'inputs': [('PINA',0x00)], 'iterations': 3 },
+	{'inputs': [('PINA',0x02)], 'iterations': 3 },
+	{'inputs': [('PINA',0x00)], 'iterations': 3 },
+	{'inputs': [('PINA',0x01)], 'iterations': 3 }],
+        'expected': [('PORTB', 1)], },
     
 #	{'description': 'test inc', 'steps': [{'inputs': [('PINA', 0x00)], 'iterations':1}, {'inputs': [('PINA', 0x01)], 'iterations': 1}], 'expected': [('PORTC', 8)]}
     ]
