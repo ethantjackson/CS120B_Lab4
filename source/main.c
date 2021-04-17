@@ -42,8 +42,7 @@ void Tick_Fct() {
             else SM_STATE = SM_WaitFirst;	
 	    break;
 	case SM_Unlock:
-	    if (PINA & 0x80) SM_STATE = SM_Lock;
-            else SM_STATE = SM_Unlock;
+            SM_STATE = SM_WaitFirst;
 	    break;
 	case SM_Lock:
 	    SM_STATE = SM_WaitFirst;
