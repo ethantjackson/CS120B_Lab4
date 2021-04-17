@@ -12,30 +12,26 @@
 #include "simAVRHeader.h"
 #endif
 
-enum SM_STATES {SM_Start, SM_Wait, SM_GetBtn, SM_Check, SM_Unlock, SM_Lock} SM_STATE;
+enum SM_STATES {SM_Wait, SM_GetBtn, SM_Check, SM_Unlock, SM_Lock} SM_STATE;
 unsigned char prevInput = 0x00;
 unsigned char Inputs [4];
 unsigned char seqIndex = 0;
 void Tick_Fct() {
     switch(SM_STATE) {
-	case SM_Start:
-	    SM_STATE = SM_Wait;
-	    break;
 	case SM_Wait: 
 	    if (PINA && !prevInput) SM_STATE = SM_GetBtn;
 	    else SM_STATE = SM_Wait;
 	    break;
 	case SM_GetBtn:
-	    if (seqIndex >= 3) SM_STATE = SM_Check;
+	    if (seqIndex > 3) SM_STATE = SM_Check;
 	    else SM_STATE = SM_Wait;
 	    break;
 	case SM_Check:
-            /*if (Inputs[0]==0x04 && Inputs[1]==0x01 && Inputs[2]==0x02 && Inputs[3]==0x01) {
+            if (Inputs[0]==0x04 && Inputs[1]==0x01 && Inputs[2]==0x02 && Inputs[3]==0x01) {
 	       if (PINB==0x00) SM_STATE = SM_Unlock;
 	       else if (PINB==0x01) SM_STATE = SM_Lock;
 	    }
-            else*/ SM_STATE = SM_Wait;	
-	    PORTB = 0xFF;
+            else SM_STATE = SM_Wait;	
 	    break;
 	case SM_Unlock:
             SM_STATE = SM_Wait;
@@ -48,8 +44,6 @@ void Tick_Fct() {
 	    break;
     }
     switch(SM_STATE) {
-	case SM_Start:
-	    break;
         case SM_Wait:
 	    break;
 	case SM_GetBtn:
@@ -75,7 +69,7 @@ int main(void) {
     DDRA = 0x00; PORTA = 0xFF;
     DDRB = 0xFF; PORTB = 0x00;
     DDRC = 0xFF; PORTC = 0x00;
-    SM_STATE = SM_Start;
+    SM_STATE = SM_Wait;
 
     while (1) {
 	Tick_Fct();
